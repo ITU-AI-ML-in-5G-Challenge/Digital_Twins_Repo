@@ -1,0 +1,40 @@
+---
+version: "3.9"
+
+services:
+  node1:
+    image: ipfs-priv:latest
+    container_name: ipfs_n1
+    build: .
+    ports:
+      - 4001
+      - 8080:8080
+      - 5001
+    volumes:
+      - ./config/ipfs/node1/data:/data/ipfs
+      - ./config/ipfs/node1/export:/export
+    networks:
+      ipfs-private-swarm:
+        ipv4_address: 172.16.239.11
+  node2:
+    image: ipfs-priv:latest
+    container_name: ipfs_n2
+    build: .
+    ports:
+      - 4001
+      - 8081:8080
+      - 5001
+    volumes:
+      - ./config/ipfs/node2/data:/data/ipfs
+      - ./config/ipfs/node2/export:/export
+    networks:
+      ipfs-private-swarm:
+        ipv4_address: 172.16.239.12
+
+networks:
+  ipfs-private-swarm:
+    name: ipfs-private-swarm
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.16.239.0/24
