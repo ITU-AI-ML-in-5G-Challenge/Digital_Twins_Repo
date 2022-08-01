@@ -1,0 +1,8 @@
+venv
+<<<<<<< HEAD
+marketplace/node_modules
+.DS_Store
+=======
+.DS_store
+marketplace/node_modules
+>>>>>>> marketplace
