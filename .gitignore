@@ -1,2 +1,2 @@
-config/ipfs/node1/data
-config/ipfs/node2/data
+config/ipfs/node1/*
+config/ipfs/node2/*
