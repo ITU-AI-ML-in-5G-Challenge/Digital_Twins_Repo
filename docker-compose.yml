@@ -2,38 +2,146 @@
 version: "3.9"
 
 services:
-  node1:
-    image: ipfs-priv:latest
-    container_name: ipfs_n1
-    build: .
+  evol-ctr-py:
+    build: ./app/Evol_Ctr/
+    container_name: evol-ctr-py
+    networks:
+      fgan-network:
+        ipv4_address: 172.16.239.11
+
+  evol-ctr-ipfs:
+    build: ./config/ipfs/
+    container_name: evol-ctr-ipfs
     ports:
       - 4001
       - 8080:8080
       - 5001
     volumes:
-      - ./config/ipfs/node1/data:/data/ipfs
-      - ./config/ipfs/node1/export:/export
+      - ./config/ipfs/Evol_Ctr/data:/data/ipfs
+      - ./config/ipfs/Evol_Ctr/export:/export
     networks:
-      ipfs-private-swarm:
-        ipv4_address: 172.16.239.11
-  node2:
-    image: ipfs-priv:latest
-    container_name: ipfs_n2
-    build: .
-    ports:
-      - 4001
-      - 8081:8080
-      - 5001
-    volumes:
-      - ./config/ipfs/node2/data:/data/ipfs
-      - ./config/ipfs/node2/export:/export
-    networks:
-      ipfs-private-swarm:
+      fgan-network:
         ipv4_address: 172.16.239.12
 
+  # evol-ctr-mkp:
+  #   # image: marketplace:latest
+  #   build: ./app/marketplace/
+  #   container_name: evol-ctr-mkp   
+  #   ports:
+  #     - 8545
+  #     - 3000
+  #   environment:
+  #     IPFS_IP: ${EVOL_CTR_IPFS_IP}
+  #   networks:
+  #     fgan-network:
+  #       ipv4_address: 172.16.239.13
+
+  exp-mg-py:
+    build: ./app/Exp_Mg/
+    container_name: exp-mg-py
+    ports:
+      - 6001
+    networks:
+      fgan-network:
+        ipv4_address: 172.16.239.21
+  
+  exp-mg-ipfs:
+    build: ./config/ipfs/
+    container_name: exp-mg-ipfs
+    ports:
+      - 4001
+      - 8091:8080
+      - 5001
+    volumes:
+      - ./config/ipfs/Exp_Mg/data:/data/ipfs
+      - ./config/ipfs/Exp_Mg/export:/export
+    networks:
+      fgan-network:
+        ipv4_address: 172.16.239.22
+
+  # exp-mg-mkp:
+  #   build: ./app/marketplace/
+  #   container_name: exp-mg-mkp   
+  #   ports:
+  #     - 8545
+  #     - 3000
+  #   environment:
+  #     IPFS_IP: ${EXP_MG_IPFS_IP}
+  #   networks:
+  #     fgan-network:
+  #       ipv4_address: 172.16.239.23
+
+  dt-py:
+    build: ./app/DT/
+    container_name: dt-py
+    ports:
+      - 6002
+    networks:
+      fgan-network:
+        ipv4_address: 172.16.239.31
+  
+  dt-ipfs:
+    build: ./config/ipfs/
+    container_name: dt-ipfs
+    ports:
+      - 4001
+      - 8092:8080
+      - 5001
+    volumes:
+      - ./config/ipfs/DT/data:/data/ipfs
+      - ./config/ipfs/DT/export:/export
+    networks:
+      fgan-network:
+        ipv4_address: 172.16.239.32
+
+  # dt-mkp:
+  #   build: ./app/marketplace/Dockerfile
+  #   container_name: dt-mkp   
+  #   ports:
+  #     - 8545
+  #     - 3000
+  #   networks:
+  #     fgan-network:
+  #       ipv4_address: 172.16.239.33
+
+  cur-ctr-py:
+    build: ./app/Cur_Ctr/
+    container_name: cur-ctr-py
+    ports:
+      - 6003
+    networks:
+      fgan-network:
+        ipv4_address: 172.16.239.41
+  
+  cur-ctr-ipfs:
+    build: ./config/ipfs/
+    container_name: cur-ctr-ipfs
+    ports:
+      - 4001
+      - 8093:8080
+      - 5001
+    volumes:
+      - ./config/ipfs/Cur_Ctr/data:/data/ipfs
+      - ./config/ipfs/Cur_Ctr/export:/export
+    networks:
+      fgan-network:
+        ipv4_address: 172.16.239.42
+
+  # cur-ctr-mkp:
+  #   build: ./app/marketplace/
+  #   container_name: cur-ctr-mkp   
+  #   ports:
+  #     - 8545
+  #     - 3000
+  #   environment:
+  #     IPFS_IP: ${CUR_CTR_IPFS_IP}
+  #   networks:
+  #     fgan-network:
+  #       ipv4_address: 172.16.239.43
+
 networks:
-  ipfs-private-swarm:
-    name: ipfs-private-swarm
+  fgan-network:
+    name: fgan-network
     driver: bridge
     ipam:
       config:
