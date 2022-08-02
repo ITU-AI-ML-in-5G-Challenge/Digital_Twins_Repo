@@ -1,3 +1,4 @@
 config/ipfs/node1/*
 config/ipfs/node2/*
+config/ipfs/test/*
 .DS_Store
