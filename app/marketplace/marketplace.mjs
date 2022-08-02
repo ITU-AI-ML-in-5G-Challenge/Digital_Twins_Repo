@@ -44,6 +44,7 @@ async function uploadFile(file) {
 
     // console.log(marketplaceSC)
     if (w) {
+        const ipfsIp = process.env.IPFS_IP;
         // Connect to the IPFS API
         const client = await create(
             {

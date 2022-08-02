@@ -17,7 +17,7 @@ def receive_controller():
     exp_list = [exp_id_list[0], exp_id_list[1]] #The list of experiments to be run
     data = {'controller': rx, 'experiments': exp_list, 'param':[]} # Send to the DT the controller 
     #and the list of experiments 
-    results = requests.post('http://localhost:6002/controller', json = data)
+    results = requests.post('http://172.16.239.31:6002/controller', json = data)
     # With the DT results send the exp_rep back to the marketplace with the id of the ctr and the expriment 
     results = results.json()
     results['id'] = rx['id'] #Add the id of the controller
@@ -25,7 +25,7 @@ def receive_controller():
     data = {'file' : json_string}
     print(data)
     # Upload the exp_rep to the Market Place
-    res = requests.post('http://localhost:3000/upload', json = data)
+    res = requests.post('http://172.16.239.23:3000/upload', json = data)
     print(res)
     return rx, 201
 

@@ -23,7 +23,7 @@ def receive_controller():
         ptr_ctr = {"type": "ptr_ctr", "id": rx["id"], "exp": "max_average"}
         json_string = json.dumps(ptr_ctr)
         data = {'file' : json_string}
-        res = requests.post('http://localhost:3000/upload', json = data)
+        res = requests.post('http://172.16.239.43:3000/upload', json = data)
         print(res.json())
         print('Added Max_Avg')
 
@@ -31,7 +31,7 @@ def receive_controller():
         ptr_ctr = {"type": "ptr_ctr", "id": rx["id"], "exp": "value"}
         json_string = json.dumps(ptr_ctr)
         data = {'file' : json_string}
-        res = requests.post('http://localhost:3000/upload', json = data)
+        res = requests.post('http://172.16.239.43:3000/upload', json = data)
         print(res.json())
         print('Added Val')
 
