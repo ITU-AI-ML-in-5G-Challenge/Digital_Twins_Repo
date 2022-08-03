@@ -4,6 +4,9 @@ FROM ipfs/kubo:latest as ipfs
 # after ipfs init is run and the swarm keys are copied (if the IPFS repo needs initialization), and before the IPFS daemon is started.
 ADD ./ipfs-config.sh /container-init.d/ipfs-config.sh
 RUN chmod a+x /container-init.d/ipfs-config.sh
-ENV LIBP2P_FORCE_PNET=1
 
-COPY ./swarm.key /data/ipfs/swarm.key
+ADD ./swarm.key swarm.key
+# RUN chmod a+rw /data/ipfs/swarm.key
+
+# Enforce private network settings
+ENV LIBP2P_FORCE_PNET=1
