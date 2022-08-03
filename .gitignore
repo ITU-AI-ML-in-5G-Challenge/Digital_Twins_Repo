@@ -1,4 +1,3 @@
-config/ipfs/node1/*
-config/ipfs/node2/*
-config/ipfs/test/*
+config/ipfs/volumes/
+
 .DS_Store
