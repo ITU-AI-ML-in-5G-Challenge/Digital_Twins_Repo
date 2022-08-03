@@ -1,0 +1,40 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+
+node_types:
+  server_type:
+    derived_from: tosca.nodes.SoftwareComponent
+    interfaces:
+      Standard:
+        operations:
+          create: 
+            implementation: playbooks/create.yaml
+
+            inputs:
+              ctr_json_input:
+                description: JSON file artifact input
+                type: string
+                default: "controller"
+
+          delete: 
+            implementation: playbooks/delete.yaml
+
+            inputs:
+              ctr_json_output:
+                description: JSON file artifact input
+                type: string
+                default: "controller"
+        
+          
+topology_template:
+
+  node_templates:
+    my-workstation:
+      type: tosca.nodes.Compute
+      attributes:
+        private_address: localhost
+        public_address: localhost
+
+    server:
+      type: server_type
+      requirements:
+        - host: my-workstation
