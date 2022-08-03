@@ -11,7 +11,7 @@ npx hardhat run scripts/deploy.js --network localhost
   
 # now we bring the primary process back into the foreground
 # and leave it there
-fg %1
+# fg %1
 
 #  Second process
 node ./marketplace.mjs &
