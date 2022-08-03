@@ -1,3 +1,5 @@
 config/ipfs/volumes/*
 
 .DS_Store
+
+tosca_deployment/.venv
