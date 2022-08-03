@@ -105,10 +105,10 @@ async function send(file) {
 
     switch (file.type) {
         case 'controller':
-            options.uri = 'http://127.0.0.1:6001/controller';
+            options.uri = 'http://172.16.239.21:6001/controller';
             break;
         case 'exp_rep':
-            options.uri = 'http://127.0.0.1:6003/exp_rep';
+            options.uri = 'http://172.16.239.41:6003/exp_rep';
             break;
         case 'ptr_ctr':
             console.log("Protected controller detected. Doesn't need to be sent.");
