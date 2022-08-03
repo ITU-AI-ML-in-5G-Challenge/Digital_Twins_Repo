@@ -52,7 +52,7 @@ if __name__ == "__main__":
             http.mount("https://", adapter)
             http.mount("http://", adapter)
 
-            res = http.post('http://127.0.0.1:3000/upload', json = data)
+            res = http.post('http://172.16.239.13:3000/upload', json = data)
             returned_data = res.json()
             print(returned_data)
 
