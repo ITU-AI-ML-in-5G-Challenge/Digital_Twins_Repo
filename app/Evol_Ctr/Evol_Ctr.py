@@ -5,6 +5,9 @@ import itertools
 from Mod_Ctr import *
 import requests
 
+from requests.adapters import HTTPAdapter
+from requests.packages.urllib3.util.retry import Retry
+
 experiment_results = []
 controller_list = []
 
@@ -40,7 +43,16 @@ if __name__ == "__main__":
             json_string = json.dumps(cdict)
             data = {'file' : json_string}
             print(data)
-            res = requests.post('http://172.16.239.13:3000/upload', json = data) 
+
+            #Set a retry strategy in case the marketplace is not yet up
+            retry_strategy = Retry(total= 10, backoff_factor = 1)
+            print(retry_strategy)
+            adapter = HTTPAdapter(max_retries = retry_strategy)
+            http = requests.Session()
+            http.mount("https://", adapter)
+            http.mount("http://", adapter)
+
+            res = http.post('http://127.0.0.1:3000/upload', json = data)
             returned_data = res.json()
             print(returned_data)
 
