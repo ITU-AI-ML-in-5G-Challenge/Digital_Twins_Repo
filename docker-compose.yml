@@ -5,6 +5,10 @@ services:
   evol-ctr-py:
     build: ./app/Evol_Ctr/
     container_name: evol-ctr-py
+    depends_on:
+      - evol-ctr-mkp
+      - evol-ctr-ipfs
+      - exp-mg-py
     networks:
       fgan-network:
         ipv4_address: 172.16.239.11
@@ -26,7 +30,9 @@ services:
   evol-ctr-mkp:
     # image: marketplace:latest
     build: ./app/marketplace/
-    container_name: evol-ctr-mkp   
+    container_name: evol-ctr-mkp
+    depends_on:
+      - evol-ctr-ipfs 
     ports:
       - 8545
       - 3000
@@ -39,6 +45,10 @@ services:
   exp-mg-py:
     build: ./app/Exp_Mg/
     container_name: exp-mg-py
+    depends_on:
+      - exp-mg-mkp
+      - exp-mg-ipfs
+      - cur-ctr-py
     ports:
       - 6001
     networks:
@@ -61,7 +71,9 @@ services:
 
   exp-mg-mkp:
     build: ./app/marketplace/
-    container_name: exp-mg-mkp   
+    container_name: exp-mg-mkp
+    depends_on:
+      - exp-mg-ipfs
     ports:
       - 8545
       - 3000
@@ -74,6 +86,8 @@ services:
   dt-py:
     build: ./app/DT/
     container_name: dt-py
+    depends_on:
+      - dt-ipfs
     ports:
       - 6002
     networks:
@@ -107,6 +121,10 @@ services:
   cur-ctr-py:
     build: ./app/Cur_Ctr/
     container_name: cur-ctr-py
+    depends_on:
+      - cur-ctr-mkp
+      - cur-ctr-ipfs
+      - dt-py
     ports:
       - 6003
     networks:
@@ -129,7 +147,9 @@ services:
 
   cur-ctr-mkp:
     build: ./app/marketplace/
-    container_name: cur-ctr-mkp   
+    container_name: cur-ctr-mkp
+    depends_on:
+      - cur-ctr-ipfs
     ports:
       - 8545
       - 3000
