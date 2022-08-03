@@ -12,4 +12,4 @@ RUN mkdir /app
 COPY ./Exp_Mg.py /app/Exp_Mg.py
 COPY ./Mod_Ctr.py /app/Mod_Ctr.py
 WORKDIR /app
-CMD [ "python3", "./DT.py" ]
+CMD [ "python3", "./Exp_Mg.py" ]
