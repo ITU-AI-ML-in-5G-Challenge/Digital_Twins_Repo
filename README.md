@@ -8,7 +8,7 @@ To start the network run the following command in your terminal from the working
 ```sh
 docker compose up -d
 ```
-> **Note:** The -d parameter in the previous command runs each container in the background. To display the logs of the entire network you can run:
+> **Note** The -d parameter in the previous command runs each container in the background. To display the logs of the entire network you can run:
 > ```sh
 > docker compose logs -f 
 > ```
