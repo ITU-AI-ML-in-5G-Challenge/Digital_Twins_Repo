@@ -2,5 +2,5 @@ config/ipfs/volumes/*
 
 .DS_Store
 
-tosca_deployment/.venv
-tosca_deployment/.opera
+ctr_deployment/.venv
+ctr_deployment/.opera

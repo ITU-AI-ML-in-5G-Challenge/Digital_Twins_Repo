@@ -1,0 +1,26 @@
+---
+- hosts: all
+  gather_facts: false
+
+  tasks:
+    # - name: Create Dockerfile
+    #   copy:
+    #     dest: /home/v1/opera/new_docker/Dockerfile
+    #     content: > 
+    #       FROM python:3.10
+
+    #       RUN pip install flask
+
+    #       RUN mkdir /app
+
+    #       COPY ./hello.py /app
+
+    #       WORKDIR /app
+
+    #       CMD ["python", "./hello.py"]
+
+    - name: Build Docker container
+      shell: "cd /home/serverv0/workarea_build-a-thon/tosca_final ; docker build -t ctr_api:v1 ."
+
+    - name: Build Docker container
+      shell: "docker run -d --name {{ctr_json_input}} --rm --security-opt apparmor:unconfined -p 5000:5000 ctr_api:v1" 
