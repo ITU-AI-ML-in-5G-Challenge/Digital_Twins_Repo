@@ -1,3 +1,3 @@
-config/ipfs/volumes/
+config/ipfs/volumes/*
 
 .DS_Store
