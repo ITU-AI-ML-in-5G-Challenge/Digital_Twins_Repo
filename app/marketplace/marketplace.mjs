@@ -48,7 +48,7 @@ async function uploadFile(file) {
         // Connect to the IPFS API
         const client = await create(
             {
-                host: 'localhost',
+                host: ipfsIp,
                 port: 5001,
                 protocol: "http"
             }
