@@ -20,7 +20,7 @@
     #       CMD ["python", "./hello.py"]
 
     - name: Build Docker container
-      shell: "cd /home/serverv0/workarea_build-a-thon/tosca_final ; docker build -t ctr_api:v1 ."
+      shell: "cd /Users/ar-alv.pendasrecondo/Desktop/Build_a_Thon/docker-network/ctr_deployment ; docker build -t ctr_api:v1 ."
 
     - name: Build Docker container
-      shell: "docker run -d --name {{ctr_json_input}} --rm --security-opt apparmor:unconfined -p 5000:5000 ctr_api:v1" 
+      shell: "docker run -d --name {{ctr_json_input}} --rm  -p 5000:5000 ctr_api:v1" 

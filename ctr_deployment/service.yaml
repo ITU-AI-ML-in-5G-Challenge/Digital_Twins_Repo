@@ -13,7 +13,7 @@ node_types:
               ctr_json_input:
                 description: JSON file artifact input
                 type: string
-                default: "controller"
+                default: "ctr"
 
           delete: 
             implementation: playbooks/delete.yaml
@@ -22,7 +22,7 @@ node_types:
               ctr_json_output:
                 description: JSON file artifact input
                 type: string
-                default: "controller"
+                default: "ctr"
         
           
 topology_template:

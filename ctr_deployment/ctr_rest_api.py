@@ -3,7 +3,7 @@ from Mod_Ctr import *
 from flask import Flask, jsonify, abort, make_response, request, url_for
 import sys
 
-ctr_json = {'type': 'controller', 'id':0, 'modules':['mul','sub']}
+ctr_json = {'type': 'controller', 'id':0, 'modules':['mul','sub'], 'parameters':[5, 3]}
 ctr = json_to_ctr(ctr_json)
 ctr_dict = ctr.get_dict()
 print(ctr_dict)
