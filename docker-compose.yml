@@ -17,24 +17,24 @@ services:
       - 8080:8080
       - 5001
     volumes:
-      - ./config/ipfs/Evol_Ctr/data:/data/ipfs
-      - ./config/ipfs/Evol_Ctr/export:/export
+      - ./config/ipfs/volumes/Evol_Ctr/data:/data/ipfs
+      - ./config/ipfs/volumes/Evol_Ctr/export:/export
     networks:
       fgan-network:
         ipv4_address: 172.16.239.12
 
-  # evol-ctr-mkp:
-  #   # image: marketplace:latest
-  #   build: ./app/marketplace/
-  #   container_name: evol-ctr-mkp   
-  #   ports:
-  #     - 8545
-  #     - 3000
-  #   environment:
-  #     IPFS_IP: ${EVOL_CTR_IPFS_IP}
-  #   networks:
-  #     fgan-network:
-  #       ipv4_address: 172.16.239.13
+  evol-ctr-mkp:
+    # image: marketplace:latest
+    build: ./app/marketplace/
+    container_name: evol-ctr-mkp   
+    ports:
+      - 8545
+      - 3000
+    environment:
+      IPFS_IP: ${EVOL_CTR_IPFS_IP}
+    networks:
+      fgan-network:
+        ipv4_address: 172.16.239.13
 
   exp-mg-py:
     build: ./app/Exp_Mg/
@@ -53,23 +53,23 @@ services:
       - 8091:8080
       - 5001
     volumes:
-      - ./config/ipfs/Exp_Mg/data:/data/ipfs
-      - ./config/ipfs/Exp_Mg/export:/export
+      - ./config/ipfs/volumes/Exp_Mg/data:/data/ipfs
+      - ./config/ipfs/volumes/Exp_Mg/export:/export
     networks:
       fgan-network:
         ipv4_address: 172.16.239.22
 
-  # exp-mg-mkp:
-  #   build: ./app/marketplace/
-  #   container_name: exp-mg-mkp   
-  #   ports:
-  #     - 8545
-  #     - 3000
-  #   environment:
-  #     IPFS_IP: ${EXP_MG_IPFS_IP}
-  #   networks:
-  #     fgan-network:
-  #       ipv4_address: 172.16.239.23
+  exp-mg-mkp:
+    build: ./app/marketplace/
+    container_name: exp-mg-mkp   
+    ports:
+      - 8545
+      - 3000
+    environment:
+      IPFS_IP: ${EXP_MG_IPFS_IP}
+    networks:
+      fgan-network:
+        ipv4_address: 172.16.239.23
 
   dt-py:
     build: ./app/DT/
@@ -88,8 +88,8 @@ services:
       - 8092:8080
       - 5001
     volumes:
-      - ./config/ipfs/DT/data:/data/ipfs
-      - ./config/ipfs/DT/export:/export
+      - ./config/ipfs/volumes/DT/data:/data/ipfs
+      - ./config/ipfs/volumes/DT/export:/export
     networks:
       fgan-network:
         ipv4_address: 172.16.239.32
@@ -121,23 +121,23 @@ services:
       - 8093:8080
       - 5001
     volumes:
-      - ./config/ipfs/Cur_Ctr/data:/data/ipfs
-      - ./config/ipfs/Cur_Ctr/export:/export
+      - ./config/ipfs/volumes/Cur_Ctr/data:/data/ipfs
+      - ./config/ipfs/volumes/Cur_Ctr/export:/export
     networks:
       fgan-network:
         ipv4_address: 172.16.239.42
 
-  # cur-ctr-mkp:
-  #   build: ./app/marketplace/
-  #   container_name: cur-ctr-mkp   
-  #   ports:
-  #     - 8545
-  #     - 3000
-  #   environment:
-  #     IPFS_IP: ${CUR_CTR_IPFS_IP}
-  #   networks:
-  #     fgan-network:
-  #       ipv4_address: 172.16.239.43
+  cur-ctr-mkp:
+    build: ./app/marketplace/
+    container_name: cur-ctr-mkp   
+    ports:
+      - 8545
+      - 3000
+    environment:
+      IPFS_IP: ${CUR_CTR_IPFS_IP}
+    networks:
+      fgan-network:
+        ipv4_address: 172.16.239.43
 
 networks:
   fgan-network:
