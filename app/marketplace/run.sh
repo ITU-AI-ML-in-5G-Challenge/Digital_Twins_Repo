@@ -3,16 +3,21 @@
 # turn on bash's job control
 set -m
 
-# Start the primary process and put it in the background
+# Start the first process
 npx hardhat node &
   
-# Start the helper process
+# Start the second process (depends on the first one)
 npx hardhat run scripts/deploy.js --network localhost 
-  
-# the my_helper_process might need to know how to wait on the
-# primary process to start before it does its work and returns
-
   
 # now we bring the primary process back into the foreground
 # and leave it there
-# fg %1
+fg %1
+
+#  Second process
+node ./marketplace.mjs &
+
+# Wait for any process to exit
+wait -n
+  
+# Exit with status of process that exited first
+exit $?
