@@ -4,3 +4,4 @@ config/ipfs/volumes/*
 
 ctr_deployment/.venv
 ctr_deployment/.opera
+ctr_deployment/ctr.json

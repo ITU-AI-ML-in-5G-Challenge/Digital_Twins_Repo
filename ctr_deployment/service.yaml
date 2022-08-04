@@ -10,21 +10,15 @@ node_types:
             implementation: playbooks/create.yaml
 
             inputs:
-              ctr_json_input:
-                description: JSON file artifact input
+              ctr_json_url:
+                description: URL for getting the json description of the controller
                 type: string
-                default: "ctr"
+                default: "http://0.0.0.0:8080/ipfs/QmXEh2BQ8giM52cWesEbWLtgmyTDv3d7c6ziDngkpTsjVk"
 
           delete: 
             implementation: playbooks/delete.yaml
 
-            inputs:
-              ctr_json_output:
-                description: JSON file artifact input
-                type: string
-                default: "ctr"
         
-          
 topology_template:
 
   node_templates:
