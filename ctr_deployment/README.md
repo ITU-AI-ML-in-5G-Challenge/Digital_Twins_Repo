@@ -1,5 +1,5 @@
 # Controller Deployment
-Tosca parsing for the deployment of a rest API given the cid of a controller. The orchestrator used is xOpera
+Tosca parsing for the deployment of a rest API given the cid of a controller. The orchestrator used is xOpera. The API will answer HTTP GET petitions with a float input with the return output given by the deployed controller.
 
 ## Prerequisites
 > **Note** Prerequisites and the Installation and Quickstart are copied from the xOpera repository: https://github.com/xlab-si/xopera-opera
@@ -27,6 +27,16 @@ $ python3 -m venv .venv && . .venv/bin/activate
 ```
 
 ## Controller Deployment
-In inputs.yaml change path and path_ctr_json. Select the json description of the controller url
+In inputs.yaml introduce the url for getting the json description of the controller from the marketplace.
+
+For the deployment of the service run:
+```console
 opera deploy service.yaml -i inputs.yaml
+```
+Now the API is deployed and will reply to HTTP GET petitions. You can check in your browser with the url http://localhost:5000/controller/<float: int> 
+
+For undeploy the service:
+For the deployment of the service run:
+```console
 opera undeploy
+```
