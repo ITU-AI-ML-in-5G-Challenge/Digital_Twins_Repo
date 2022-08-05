@@ -27,7 +27,7 @@ $ python3 -m venv .venv && . .venv/bin/activate
 ```
 
 ## Controller Deployment
-In `inputs.yaml` introduce the url for getting the json description of the controller from the marketplace.
+In `inputs.yaml` introduce the url for getting the json description of the controller from the marketplace. ==Also change the variable path== with the current directory (the result of running `inputs.yaml` inside `/ctr_deployment`)
 
 * Deploy the service by runing:
 ```console
