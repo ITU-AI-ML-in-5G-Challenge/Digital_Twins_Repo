@@ -18,6 +18,11 @@
     #       WORKDIR /app
 
     #       CMD ["python", "./hello.py"]
+    - name: Find out playbooks path
+      shell: pwd
+      register: playbook_path_output
+    - debug: var=playbook_path_output.stdout
+    
     - name: Get the json description of the controler from the marketplace.
       get_url:
         url: "{{ctr_json_url}}"

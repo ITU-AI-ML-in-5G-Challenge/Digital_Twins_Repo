@@ -12,7 +12,9 @@ node_types:
         default: { get_input: path }
       path_ctr_json: 
         type: string
-        default: { get_input: path_ctr_json }
+        default: { concat: [ { get_input: path }, '/ctr.json'] }
+
+
     interfaces:
       Standard:
         operations:
@@ -48,8 +50,6 @@ topology_template:
     ctr_json_url:
       type: string
     path:
-      type: string
-    path_ctr_json:
       type: string
 
   node_templates:
