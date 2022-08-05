@@ -36,7 +36,6 @@ opera deploy service.yaml -i inputs.yaml
 Now the API is deployed and will reply to HTTP GET petitions. You can check it in your browser with the url http://localhost:5000/controller/1.0 . Instead of 1.0 any other float input can be introduced.
 
 * Undeploy the service:
-For the deployment of the service run:
 ```console
 opera undeploy
 ```
