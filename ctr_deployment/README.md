@@ -29,7 +29,7 @@ $ python3 -m venv .venv && . .venv/bin/activate
 ## Controller Deployment
 In `inputs.yaml` introduce the url for getting the json description of the controller from the marketplace. **ALSO CHANGE THE VARIABLE PATH** with the current absolute path (the output when running `pwd` inside `/ctr_deployment`).
 
-* Deploy the service by runing:
+* Deploy the service by running:
 ```console
 (.venv) $ opera deploy service.yaml -i inputs.yaml
 ```
