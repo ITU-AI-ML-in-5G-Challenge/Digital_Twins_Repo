@@ -31,11 +31,11 @@ In `inputs.yaml` introduce the url for getting the json description of the contr
 
 * Deploy the service by runing:
 ```console
-opera deploy service.yaml -i inputs.yaml
+(.venv) $ opera deploy service.yaml -i inputs.yaml
 ```
 Now the API is deployed and will reply to HTTP GET petitions. You can check it in your browser with the url http://localhost:5000/controller/1.0 . Instead of 1.0 any other float input can be introduced.
 
 * Undeploy the service:
 ```console
-opera undeploy
+(.venv) $ opera undeploy
 ```
