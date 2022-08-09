@@ -1,7 +1,29 @@
 ---
 version: "3.9"
 
+x-besu-def:
+  &besu-def
+  restart: "on-failure"
+  image: hyperledger/besu:latest
+  env_file:
+    - ./config/besu/.env
+  entrypoint:
+    - /bin/bash
+    - -c
+    - |
+
+      cp "/config/QBFTgenesis.json" /config/genesis.json
+
+      /opt/besu/bin/besu \
+      --config-file=/config/config.toml \
+      --p2p-host=$$(hostname -i) \
+      --min-gas-price=0 \
+      --rpc-http-api=EEA,WEB3,ETH,NET,TRACE,DEBUG,ADMIN,TXPOOL,PERM,QBFT \
+      --rpc-ws-api=EEA,WEB3,ETH,NET,TRACE,DEBUG,ADMIN,TXPOOL,PERM,QBFT ;
+
 services:
+
+# EVOLUTION CONTROLLER
   evol-ctr-py:
     build: ./app/Evol_Ctr/
     container_name: evol-ctr-py
@@ -27,21 +49,43 @@ services:
       fgan-network:
         ipv4_address: 172.16.239.12
 
+  evol-ctr-besu:
+    << : *besu-def
+    container_name: evol-ctr-besu
+    ports:
+      - 21001:8545/tcp
+      - 30303
+      - 9545
+    environment:
+      - OTEL_RESOURCE_ATTRIBUTES=service.name=validator1,service.version=latest
+    labels:
+      - "consensus=besu"
+    volumes:
+      - ./config/besu/:/config
+      - ./config/nodes/validator1:/opt/besu/keys
+      - ./logs/besu:/tmp/besu
+    networks:
+      fgan-network:
+        ipv4_address: 172.16.239.14
+
   evol-ctr-mkp:
-    # image: marketplace:latest
     build: ./app/marketplace/
     container_name: evol-ctr-mkp
     depends_on:
       - evol-ctr-ipfs 
+      - evol-ctr-besu
     ports:
       - 8545
       - 3000
     environment:
       IPFS_IP: ${EVOL_CTR_IPFS_IP}
+      BESU_IP: 172.16.239.14
+      NODE_ADDRESS: 0xb94855a61b4feb5e18e981f2a4d89db40d62d118
     networks:
       fgan-network:
         ipv4_address: 172.16.239.13
 
+# EXPERIMENTATION MANAGER
   exp-mg-py:
     build: ./app/Exp_Mg/
     container_name: exp-mg-py
@@ -69,6 +113,27 @@ services:
       fgan-network:
         ipv4_address: 172.16.239.22
 
+  exp-mg-besu:
+    << : *besu-def
+    container_name: exp-mg-besu
+    ports:
+      - 21002:8545/tcp
+      - 30303
+      - 9545
+    environment:
+      - OTEL_RESOURCE_ATTRIBUTES=service.name=validator2,service.version=latest
+    labels:
+      - "consensus=besu"
+    volumes:
+      - ./config/besu/:/config
+      - ./config/nodes/validator2:/opt/besu/keys
+      - ./logs/besu:/tmp/besu
+    depends_on:
+      - evol-ctr-besu
+    networks:
+      fgan-network:
+        ipv4_address: 172.16.239.24
+
   exp-mg-mkp:
     build: ./app/marketplace/
     container_name: exp-mg-mkp
@@ -79,10 +144,13 @@ services:
       - 3000
     environment:
       IPFS_IP: ${EXP_MG_IPFS_IP}
+      BESU_IP: 172.16.239.24
+      NODE_ADDRESS: 0x6be9bd68910a1db783a687c625a2e5dcc7369abf
     networks:
       fgan-network:
         ipv4_address: 172.16.239.23
 
+# DIGITAL TWIN
   dt-py:
     build: ./app/DT/
     container_name: dt-py
@@ -108,6 +176,27 @@ services:
       fgan-network:
         ipv4_address: 172.16.239.32
 
+  dt-besu:
+    << : *besu-def
+    container_name: dt-besu
+    ports:
+      - 21003:8545/tcp
+      - 30303
+      - 9545
+    environment:
+      - OTEL_RESOURCE_ATTRIBUTES=service.name=validator3,service.version=latest
+    labels:
+      - "consensus=besu"
+    volumes:
+      - ./config/besu/:/config
+      - ./config/nodes/validator3:/opt/besu/keys
+      - ./logs/besu:/tmp/besu
+    depends_on:
+      - evol-ctr-besu
+    networks:
+      fgan-network:
+        ipv4_address: 172.16.239.34
+
   # dt-mkp:
   #   build: ./app/marketplace/Dockerfile
   #   container_name: dt-mkp   
@@ -118,6 +207,7 @@ services:
   #     fgan-network:
   #       ipv4_address: 172.16.239.33
 
+# CURATION CONTROLLER
   cur-ctr-py:
     build: ./app/Cur_Ctr/
     container_name: cur-ctr-py
@@ -145,6 +235,27 @@ services:
       fgan-network:
         ipv4_address: 172.16.239.42
 
+  cur-ctr-besu:
+    << : *besu-def
+    container_name: cur-ctr-besu
+    ports:
+      - 21004:8545/tcp
+      - 30303
+      - 9545
+    environment:
+      - OTEL_RESOURCE_ATTRIBUTES=service.name=validator4,service.version=latest
+    labels:
+      - "consensus=besu"
+    volumes:
+      - ./config/besu/:/config
+      - ./config/nodes/validator4:/opt/besu/keys
+      - ./logs/besu:/tmp/besu
+    depends_on:
+      - evol-ctr-besu
+    networks:
+      fgan-network:
+        ipv4_address: 172.16.239.44
+
   cur-ctr-mkp:
     build: ./app/marketplace/
     container_name: cur-ctr-mkp
@@ -155,6 +266,8 @@ services:
       - 3000
     environment:
       IPFS_IP: ${CUR_CTR_IPFS_IP}
+      BESU_IP: 172.16.239.44
+      NODE_ADDRESS: 0xdc7ee82e5cf2b38c6eb7086cc6f8869f71198aec
     networks:
       fgan-network:
         ipv4_address: 172.16.239.43
