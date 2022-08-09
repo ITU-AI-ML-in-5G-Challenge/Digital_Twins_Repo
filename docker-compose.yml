@@ -9,6 +9,8 @@ services:
       - evol-ctr-mkp
       - evol-ctr-ipfs
       - exp-mg-py
+    ports:
+      - 6004
     networks:
       fgan-network:
         ipv4_address: 172.16.239.11
