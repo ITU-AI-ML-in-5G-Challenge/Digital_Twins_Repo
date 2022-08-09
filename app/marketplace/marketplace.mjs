@@ -108,7 +108,10 @@ async function send(file) {
             options.uri = 'http://172.16.239.21:6001/controller';
             break;
         case 'exp_rep':
+            // We also send the report to the Evolution Controller, closing the loop.
+            let optionsEvolCtr = options;
             options.uri = 'http://172.16.239.41:6003/exp_rep';
+            optionsEvolCtr.uri = 'http://172.16.239.11:6004/exp_rep';
             break;
         case 'ptr_ctr':
             console.log("Protected controller detected. Doesn't need to be sent.");
@@ -128,6 +131,19 @@ async function send(file) {
         .catch(function (err) {
             console.log(err);
         });
+    if (optionsEvolCtr) {
+        const sendrequestEvolCtr = await request(optionsEvolCtr)
+
+            // The parsedBody contains the data
+            // sent back from the Flask server 
+            .then(function (parsedBody) {
+                // console.log(parsedBody);
+                return parsedBody;
+            })
+            .catch(function (err) {
+                console.log(err);
+            });
+    }
     return;
 
 }
