@@ -3,5 +3,6 @@
   gather_facts: false
 
   tasks:
+
     - name: Stop container
-      shell: "docker stop {{ctr_json_output}}"
+      shell: "docker stop ctr_api"
