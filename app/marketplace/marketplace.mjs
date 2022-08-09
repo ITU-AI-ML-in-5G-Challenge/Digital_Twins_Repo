@@ -34,16 +34,18 @@ app.post("/upload", async function (req, res) {
 });
 
 async function uploadFile(file) {
-    const w = getTestWallet();
+    // const w = getTestWallet();
+    const signer = getJsonRpcSigner();
 
     const marketplaceSC = new ethers.Contract(
         contractAddress.Marketplace,
-        MarketplaceArtifact.abi
-        // w.getSigner(0)
+        MarketplaceArtifact.abi,
+        signer
     );
 
     // console.log(marketplaceSC)
-    if (w) {
+    // if (w) {
+    if (signer) {
         const ipfsIp = process.env.IPFS_IP;
         // Connect to the IPFS API
         const client = await create(
@@ -142,6 +144,19 @@ function getTestWallet() {
     console.log("Account in use: ", wallet.address);
 
     return wallet;
+}
+
+function getJsonRpcSigner() {
+    // IP address of the besu container
+    const besuIP = process.env.BESU_IP;
+    // Node address of the besu node
+    const nodeAddress = process.env.NODE_ADDRESS || "127.0.0.1";
+
+    const provider = new ethers.providers.JsonRpcProvider(`http://${besuIP}:8545`);
+
+    const signer = provider.getSigner(nodeAddress);
+
+    return signer;
 }
 
 // Server listening to PORT 3000

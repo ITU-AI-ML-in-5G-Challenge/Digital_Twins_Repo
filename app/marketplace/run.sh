@@ -4,17 +4,17 @@
 set -m
 
 # Start the first process
-npx hardhat node &
+# npx hardhat node &
   
 # Start the second process (depends on the first one)
-npx hardhat run scripts/deploy.js --network localhost 
+npx hardhat run scripts/deploy.js --network besu 
   
 # now we bring the primary process back into the foreground
 # and leave it there
 # fg %1
 
-#  Second process
-node ./marketplace.mjs &
+#  Run the app
+# node ./marketplace.mjs &
 
 # Wait for any process to exit
 wait -n
