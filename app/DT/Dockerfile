@@ -5,6 +5,7 @@ ENV PATH="$VIRTUAL_ENV/bin:$PATH"
 
 # Install dependencies:
 RUN pip install flask \ 
+    pip install gunicorn \ 
     python-math \
     requests_html
 
@@ -12,4 +13,5 @@ RUN mkdir /app
 COPY ./DT.py /app/DT.py
 COPY ./Mod_Ctr.py /app/Mod_Ctr.py
 WORKDIR /app
-CMD [ "python3", "./DT.py" ]
+# CMD [ "python3", "-u", "./DT.py" ]
+CMD ["gunicorn", "-b",  "0.0.0.0:6002", "DT:app"]

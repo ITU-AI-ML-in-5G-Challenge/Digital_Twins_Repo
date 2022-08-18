@@ -1,6 +1,7 @@
 ---
 version: "3.9"
 
+
 services:
   evol-ctr-py:
     build: ./app/Evol_Ctr/
@@ -14,6 +15,8 @@ services:
     networks:
       fgan-network:
         ipv4_address: 172.16.239.11
+    environment:
+      - PYTHONUNBUFFERED=1
 
   evol-ctr-ipfs:
     build: ./config/ipfs/
@@ -44,6 +47,7 @@ services:
       fgan-network:
         ipv4_address: 172.16.239.13
 
+
   exp-mg-py:
     build: ./app/Exp_Mg/
     container_name: exp-mg-py
@@ -56,6 +60,8 @@ services:
     networks:
       fgan-network:
         ipv4_address: 172.16.239.21
+    environment:
+      - PYTHONUNBUFFERED=1
   
   exp-mg-ipfs:
     build: ./config/ipfs/
@@ -70,6 +76,7 @@ services:
     networks:
       fgan-network:
         ipv4_address: 172.16.239.22
+    
 
   exp-mg-mkp:
     build: ./app/marketplace/
@@ -95,6 +102,8 @@ services:
     networks:
       fgan-network:
         ipv4_address: 172.16.239.31
+    environment:
+      - PYTHONUNBUFFERED=1
   
   dt-ipfs:
     build: ./config/ipfs/
@@ -132,6 +141,8 @@ services:
     networks:
       fgan-network:
         ipv4_address: 172.16.239.41
+    environment:
+      - PYTHONUNBUFFERED=1
   
   cur-ctr-ipfs:
     build: ./config/ipfs/

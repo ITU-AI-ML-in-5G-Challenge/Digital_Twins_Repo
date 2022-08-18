@@ -75,15 +75,18 @@ def receive_exp_rep():
     #Recive the exp_rep from the market place
     rx = request.json
     results = rx['results']
-    print(rx)
 
     if (N < N_CONTROLLERS):
         data = {'file' : controller_list[N]}
         #Send next controller
+        print(data)
         res = http.post('http://172.16.239.13:3000/upload', json = data)
         returned_data = res.json()
         print(returned_data)
         N += 1
+        
+    return rx, 201
+
 
 
 

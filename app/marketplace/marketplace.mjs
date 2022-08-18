@@ -102,14 +102,14 @@ async function send(file) {
         // the body to JSON 
         json: true
     };
-
+    let optionsEvolCtr = undefined;
     switch (file.type) {
         case 'controller':
             options.uri = 'http://172.16.239.21:6001/controller';
             break;
         case 'exp_rep':
             // We also send the report to the Evolution Controller, closing the loop.
-            let optionsEvolCtr = options;
+            optionsEvolCtr = options;
             options.uri = 'http://172.16.239.41:6003/exp_rep';
             optionsEvolCtr.uri = 'http://172.16.239.11:6004/exp_rep';
             break;

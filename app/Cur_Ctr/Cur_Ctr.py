@@ -12,8 +12,8 @@ exp_id_list = ['average', 'value'] #List of avaliable experiments
 app = Flask(__name__)
 
 @app.route('/exp_rep', methods=["POST"])
-def receive_controller():
-    #Recive the controller from the marketplace
+def receive_exp_rep():
+    #Recive the exp_rep from the market place
     rx = request.json
     results = rx['results']
     print(rx)
