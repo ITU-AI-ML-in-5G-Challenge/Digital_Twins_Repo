@@ -33,7 +33,6 @@ services:
         ipv4_address: 172.16.239.12
 
   evol-ctr-mkp:
-    # image: marketplace:latest
     build: ./app/marketplace/
     container_name: evol-ctr-mkp
     depends_on:
