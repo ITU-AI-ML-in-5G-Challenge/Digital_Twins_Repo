@@ -1,5 +1,5 @@
 # Controller Deployment
-Tosca parsing for the deployment of a REST service given the cid of a controller. The orchestrator used is xOpera. The service will answer HTTP GET petitions with a float input with a json that contains the output returned by the deployed controller.
+Tosca parsing for the deployment of a REST service given the cid of a controller. The orchestrator used is xOpera. The service will answer HTTP GET requests with a float input with a json that contains the output returned by the deployed controller.
 
 ## Prerequisites
 > **Note** Prerequisites and the Installation and Quickstart are copied from the xOpera repository: https://github.com/xlab-si/xopera-opera
@@ -33,7 +33,7 @@ In `inputs.yaml` introduce the url for getting the json description of the contr
 ```console
 (.venv) $ opera deploy service.yaml -i inputs.yaml
 ```
-Now the service is deployed and will reply to HTTP GET petitions. You can check it in your browser with the url http://localhost:5000/controller/1.0 . Instead of 1.0, any other float input can be introduced.
+Now the service is deployed and will reply to HTTP GET requests. You can check it in your browser with the url http://localhost:5000/controller/1.0 . Instead of 1.0, any other float input can be introduced.
 
 * Undeploy the service:
 ```console
