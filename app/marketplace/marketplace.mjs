@@ -102,9 +102,7 @@ async function send(file) {
         // the body to JSON 
         json: true
     };
-
     let optionsEvolCtr = undefined;
-
     switch (file.type) {
         case 'controller':
             options.uri = 'http://172.16.239.21:6001/controller';
