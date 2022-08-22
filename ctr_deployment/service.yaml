@@ -1,8 +1,20 @@
 tosca_definitions_version: tosca_simple_yaml_1_3
 
 node_types:
-  server_type:
+  ctr_api_type:
     derived_from: tosca.nodes.SoftwareComponent
+    attributes:
+      ctr_json_url: 
+        type: string
+        default: { get_input: ctr_json_url }
+      path: 
+        type: string
+        default: { get_input: path }
+      path_ctr_json: 
+        type: string
+        default: { concat: [ { get_input: path }, '/ctr.json'] }
+
+
     interfaces:
       Standard:
         operations:
@@ -13,13 +25,32 @@ node_types:
               ctr_json_url:
                 description: URL for getting the json description of the controller
                 type: string
-                default: "http://0.0.0.0:8080/ipfs/QmXEh2BQ8giM52cWesEbWLtgmyTDv3d7c6ziDngkpTsjVk"
+                default: {get_attribute: [SELF, ctr_json_url]}
+              path:
+                description: Path for the ctr deployment
+                type: string
+                default: {get_attribute: [SELF, path]}
+              path_ctr_json:
+                description: Path to store the controller json description
+                type: string
+                default: {get_attribute: [SELF, path_ctr_json]}
 
           delete: 
             implementation: playbooks/delete.yaml
 
+            inputs:
+              path:
+                description: Path for the ctr deployment
+                type: string
+                default: {get_attribute: [SELF, path]}
+
         
 topology_template:
+  inputs:
+    ctr_json_url:
+      type: string
+    path:
+      type: string
 
   node_templates:
     my-workstation:
@@ -28,7 +59,7 @@ topology_template:
         private_address: localhost
         public_address: localhost
 
-    server:
-      type: server_type
+    ctr_api:
+      type: ctr_api_type
       requirements:
         - host: my-workstation

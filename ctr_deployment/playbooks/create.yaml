@@ -3,29 +3,15 @@
   gather_facts: false
 
   tasks:
-    # - name: Create Dockerfile
-    #   copy:
-    #     dest: /home/v1/opera/new_docker/Dockerfile
-    #     content: > 
-    #       FROM python:3.10
 
-    #       RUN pip install flask
-
-    #       RUN mkdir /app
-
-    #       COPY ./hello.py /app
-
-    #       WORKDIR /app
-
-    #       CMD ["python", "./hello.py"]
     - name: Get the json description of the controler from the marketplace.
       get_url:
         url: "{{ctr_json_url}}"
-        dest: /Users/ar-alv.pendasrecondo/Desktop/Build_a_Thon/docker-network/ctr_deployment/ctr.json ./
+        dest: "{{path_ctr_json}}"
         mode: '0777'
 
     - name: Build Docker container
-      shell: "cd /Users/ar-alv.pendasrecondo/Desktop/Build_a_Thon/docker-network/ctr_deployment ; docker build -t ctr_api:v1 ."
+      shell: "cd {{path}} ; docker build -t ctr_api:v1 ."
 
     - name: Build Docker container
       shell: "docker run -d --name ctr_api --rm  -p 5000:5000 ctr_api:v1" 
