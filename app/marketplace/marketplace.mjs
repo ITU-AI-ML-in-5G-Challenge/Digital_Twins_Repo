@@ -112,9 +112,11 @@ async function send(file) {
             options.uri = 'http://172.16.239.41:6003/exp_rep';
             
             // We also send the report to the Evolution Controller, closing the loop.
-            // We copy the options object to send another post to the Evolution Controller
-            optionsEvolCtr = options;
+            // We make a deep copy of the options object to send another post to the Evolution Controller
+            optionsEvolCtr = JSON.parse(JSON.stringify(options));
             optionsEvolCtr.uri = 'http://172.16.239.11:6004/exp_rep';
+            
+            console.log(options, optionsEvolCtr);
             break;
         case 'ptr_ctr':
             console.log("Protected controller detected. Doesn't need to be sent.");
