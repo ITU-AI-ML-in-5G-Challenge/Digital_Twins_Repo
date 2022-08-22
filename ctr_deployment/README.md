@@ -1,5 +1,5 @@
 # Controller Deployment
-Tosca parsing for the deployment of a REST service given the cid of a controller. The orchestrator used is xOpera. The service will answer HTTP GET requests with a float input with a json that contains the output returned by the deployed controller.
+Tosca parsing for the deployment of a REST service given the cid of a controller. The orchestrator used is xOpera. The service will answer HTTP GET requests that contains a float input with a json that contains the output returned by the deployed controller.
 
 ## Prerequisites
 > **Note** Prerequisites and the Installation and Quickstart are copied from the xOpera repository: https://github.com/xlab-si/xopera-opera
@@ -14,10 +14,6 @@ $ sudo apt update
 $ sudo apt install -y python3-venv python3-wheel python-wheel-common
 ```
 ## Installation and Quickstart
-The orchestration tool is available on PyPI as a package named [opera]. 
-Apart from the latest [PyPI production] version, you can also find the latest opera [PyPI development] version, which 
-includes pre-releases so that you will be able to test the latest features before they are officially released.
-
 The simplest way to test `opera` is to install it into Python virtual environment:
 
 ```console
