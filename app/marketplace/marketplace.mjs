@@ -17,6 +17,7 @@ import contractAddress from "./artf/contract-address.json" assert {type: "json"}
 const ERROR_CODE_TX_REJECTED_BY_USER = 4001;
 
 const app = express();
+const w = getTestWallet();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -34,16 +35,15 @@ app.post("/upload", async function (req, res) {
 });
 
 async function uploadFile(file) {
-    const w = getTestWallet();
 
     const marketplaceSC = new ethers.Contract(
         contractAddress.Marketplace,
-        MarketplaceArtifact.abi
-        // w.getSigner(0)
+        MarketplaceArtifact.abi,
+        w
     );
 
     // console.log(marketplaceSC)
-    if (w) {
+    if (w && marketplaceSC) {
         const ipfsIp = process.env.IPFS_IP;
         // Connect to the IPFS API
         const client = await create(
@@ -103,14 +103,19 @@ async function send(file) {
         json: true
     };
 
+    let optionsEvolCtr = undefined;
+
     switch (file.type) {
         case 'controller':
             options.uri = 'http://172.16.239.21:6001/controller';
             break;
         case 'exp_rep':
-            // We also send the report to the Evolution Controller, closing the loop.
-            let optionsEvolCtr = options;
+            // Experimentation report is sent to the Curation Controller
             options.uri = 'http://172.16.239.41:6003/exp_rep';
+            
+            // We also send the report to the Evolution Controller, closing the loop.
+            // We copy the options object to send another post to the Evolution Controller
+            optionsEvolCtr = options;
             optionsEvolCtr.uri = 'http://172.16.239.11:6004/exp_rep';
             break;
         case 'ptr_ctr':
@@ -152,12 +157,18 @@ function getTestWallet() {
     // Test Account: Account #16: 0x2546BcD3c84621e976D8185a91A922aE77ECEc30 (10000 ETH) 
     // Private Key: 0xea6c44ac03bff858b476bba40716402b03e41b8e97e276d1baec7c37d42484a0
 
-    const privateKey = "0xea6c44ac03bff858b476bba40716402b03e41b8e97e276d1baec7c37d42484a0";
-    const wallet = new ethers.Wallet(privateKey);
+    const privateKey = process.env.PRIV_KEY;
+
+    // const privateKey = "0xea6c44ac03bff858b476bba40716402b03e41b8e97e276d1baec7c37d42484a0";
+    const wallet = new ethers.Wallet(privateKey, ethers.provider);
 
     console.log("Account in use: ", wallet.address);
 
     return wallet;
+}
+
+function getWallet(){
+
 }
 
 // Server listening to PORT 3000

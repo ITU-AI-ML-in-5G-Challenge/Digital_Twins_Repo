@@ -40,6 +40,7 @@ services:
       - 3000
     environment:
       IPFS_IP: ${EVOL_CTR_IPFS_IP}
+      PRIV_KEY: ${EVOL_CTR_PRIV_KEY}
     networks:
       fgan-network:
         ipv4_address: 172.16.239.13
@@ -81,6 +82,7 @@ services:
       - 3000
     environment:
       IPFS_IP: ${EXP_MG_IPFS_IP}
+      PRIV_KEY: ${EXP_MG_PRIV_KEY}
     networks:
       fgan-network:
         ipv4_address: 172.16.239.23
@@ -157,6 +159,7 @@ services:
       - 3000
     environment:
       IPFS_IP: ${CUR_CTR_IPFS_IP}
+      PRIV_KEY: ${CUR_CTR_PRIV_KEY}
     networks:
       fgan-network:
         ipv4_address: 172.16.239.43
@@ -168,3 +171,4 @@ networks:
     ipam:
       config:
         - subnet: 172.16.239.0/24
+ 

@@ -4,7 +4,11 @@
 * Docker Engine and Docker Compose: https://www.docker.com/get-started/
 
 ## Quick-start
-To start the network run the following command in your terminal from the working directory:
+Begin by enabling swarm mode by running the following command:
+```sh
+docker swarm init
+```
+Then, to start the network run the following command in your terminal from the working directory:
 ```sh
 docker compose up -d
 ```
