@@ -32,6 +32,7 @@ app = Flask(__name__)
 def receive_controller():
     #Recive the controller for testing and the json with the exp
     rx = request.json
+    print(rx)
     controller_json = rx['controller']
     experiments = rx['experiments']
     controller = json_to_ctr(controller_json)
