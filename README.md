@@ -4,11 +4,8 @@
 * Docker Engine and Docker Compose: https://www.docker.com/get-started/
 
 ## Quick-start
-Begin by enabling swarm mode by running the following command:
-```sh
-docker swarm init
-```
-Then, to start the network run the following command in your terminal from the working directory:
+
+To start the network run the following command in your terminal from the working directory:
 ```sh
 docker compose up -d
 ```
@@ -26,6 +23,18 @@ To stop the network and remove the containers run:
 ```sh
 docker compose down
 ```
+
+> **Note** Once deployed, you can gain access the uploaded artifacts on your browser by accessing the IPFS HTTP API of each node. 
+> 
+> For instance, you could connect to the HTTP API for the Evolution Controller node in your browser with the url http://0.0.0.0:8080/ipfs/ + **< your-file-cid >**
+> The different port mappings for each node are listed below: 
+> * Evol_Ctr: 8080
+> * Exp_Mg: 8091
+> * DT: 8092
+> * Cur_Ctr: 8093
+
+
+
 
 ## Troubleshooting
 The following is a list of useful commands to run for troubleshooting or solving issues while building the project:
