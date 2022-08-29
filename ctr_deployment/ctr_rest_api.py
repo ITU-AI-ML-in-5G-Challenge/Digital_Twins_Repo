@@ -17,7 +17,6 @@ app = Flask(__name__)
 
 @app.route('/controller/<float:x>', methods=["GET"])
 def receive_query(x):
-    #Recive the controller for testing and the json with the exp
 
     return jsonify({'controller': ctr_dict, 'input': x, 'output': ctr.execute(x)}), 201
 
