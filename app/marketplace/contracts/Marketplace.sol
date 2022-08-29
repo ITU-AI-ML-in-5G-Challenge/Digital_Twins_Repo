@@ -25,7 +25,7 @@ contract Marketplace {
     // fileCount (i.e. file number) => file
     mapping (uint256 => File) public fileStore;
 
-    // Event for informing off-chain apps when a file is uploaded. 
+    // Event for informing off-chain apps when a file is uploaded.
     event FileUploaded(
         uint256 fileNumber,
         string cid,
@@ -33,9 +33,13 @@ contract Marketplace {
         string objectType,
         address payable uploader
     );
+
     // A function to register files into the chain
-    function uploadFile(string memory _cid, string memory _name, string memory _objectType) public {
-        
+    function uploadFile(
+        string memory _cid,
+        string memory _name,
+        string memory _objectType
+    ) public {
         // Input validation
         require(bytes(_cid).length > 0);
         require(bytes(_name).length > 0);
@@ -62,5 +66,16 @@ contract Marketplace {
             _objectType,
             payable(msg.sender)
         );
+    }
+
+    function getLastFile()
+        external
+        view
+        returns (string memory cid)
+    {
+
+        return fileStore[fileCount].cid;
+        // console.log("File struct in ETH: ", uploadedFiles[account]);
+        // return uploadedFiles[account];
     }
 }
