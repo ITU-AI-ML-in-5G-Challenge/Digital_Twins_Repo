@@ -23,7 +23,7 @@ services:
     container_name: evol-ctr-ipfs
     ports:
       - 4001
-      - 8080:8080
+      - 8090:8080
       - 5001
     volumes:
       - ./config/ipfs/volumes/Evol_Ctr/data:/data/ipfs
