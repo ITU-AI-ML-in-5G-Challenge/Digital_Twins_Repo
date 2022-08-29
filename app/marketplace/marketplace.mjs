@@ -1,6 +1,5 @@
-// ethers to interact with the Ethereum network and our contract
+// Import ethers to interact with the Ethereum network and our contract
 import { ethers } from "ethers";
-// import {hre} from "hardhat";
 
 import express from "express";
 import bodyParser from "body-parser";
@@ -17,7 +16,7 @@ import contractAddress from "./artf/contract-address.json" assert {type: "json"}
 const ERROR_CODE_TX_REJECTED_BY_USER = 4001;
 
 const app = express();
-const w = getTestWallet();
+const w = getWallet();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -26,12 +25,20 @@ app.post("/upload", async function (req, res) {
 
     const file = req.body.file;
     const fileJson = JSON.parse(file);
-    console.log("This is the sent file: ", file);
+    console.log("=================== NEW FILE RECEIVED ===================");
+    console.log("File type: ", fileJson.type);
+    console.log("Content: ", file);
+
+    // Upload file to the Marketplace (IPFS + Ethereum)
     const result = await uploadFile(file);
+
+    // We add the CID (Content Identifier) of the uploaded file to the response
     res.json({ cid: result.path });
-    console.log(fileJson.type);
+
+    // We send the file to the corresponding nodes.  
     const resp = await send(fileJson);
-    if (resp) console.log("File sent correctly.");
+
+    if (resp) console.log("FILE WAS SENT SUCCESSFULLY");
 });
 
 async function uploadFile(file) {
@@ -42,9 +49,21 @@ async function uploadFile(file) {
         w
     );
 
-    // console.log(marketplaceSC)
+    // marketplaceSC.on('FileUploaded', (fileNumber, cid, name, objectType, uploader) => {
+    //     console.log({
+    //         fileNumber: fileNumber,
+    //         cid: cid,
+    //         name: name,
+    //         objectType: objectType,
+    //         uploader: uploader
+    //     });
+    // });
+
     if (w && marketplaceSC) {
+
+        // We load the IP of the IPFS container from the environment variable named "IPFS_IP"
         const ipfsIp = process.env.IPFS_IP;
+
         // Connect to the IPFS API
         const client = await create(
             {
@@ -53,10 +72,10 @@ async function uploadFile(file) {
                 protocol: "http"
             }
         );
-
+        // Before uploading to IPFS, we compute only the CID to be registered in Ethereum.
         const result = await client.add(file, { onlyHash: true });
-        console.log("File hash computed:", result.path);
-        console.log("File result with only hash:", result);
+        console.log("File CID computed:", result.path);
+        // console.log("File result with only hash:", result);
 
         if (result) {
             try {
@@ -64,6 +83,7 @@ async function uploadFile(file) {
 
                 // Wait for tx to be mined and get receipt.
                 const receipt = await tx.wait();
+                // console.log(receipt.logs);
 
                 if (receipt.status === 0) {
                     // We can't know the exact error that made the transaction fail when it
@@ -80,9 +100,21 @@ async function uploadFile(file) {
                 }
 
             } finally {
+                // If we get here, the transaction was succesful.
+                console.log("File upload was successfully registered in the chain !");
+                // const returnedCID = await marketplaceSC.getLastFile();
+                // console.log("Returned CID: ", returnedCID);
+                // marketplaceSC.on("FileUploaded", () => {console.log("FileUploaded")})
+                // let event = marketplaceSC.FileUploaded(function(error, result) {
+                //     if(!error)console.log(result);
+                // });
+
+                // Only after the transaction has succeeded the file is added to IPFS.
                 const f = await client.add(file);
+
                 if (f) {
-                    console.log("File successfully uploaded to IPFS: ", result);
+                    console.log("File successfully uploaded to IPFS !");
+                    console.log("File: ", result);
                     return f;
                 }
 
@@ -110,12 +142,12 @@ async function send(file) {
         case 'exp_rep':
             // Experimentation report is sent to the Curation Controller
             options.uri = 'http://172.16.239.41:6003/exp_rep';
-            
+
             // We also send the report to the Evolution Controller, closing the loop.
             // We make a deep copy of the options object to send another post to the Evolution Controller
             optionsEvolCtr = JSON.parse(JSON.stringify(options));
             optionsEvolCtr.uri = 'http://172.16.239.11:6004/exp_rep';
-            
+
             console.log(options, optionsEvolCtr);
             break;
         case 'ptr_ctr':
@@ -149,26 +181,20 @@ async function send(file) {
                 console.log(err);
             });
     }
-    return;
+    return sendrequest || sendrequestEvolCtr;
 
 }
-
-function getTestWallet() {
-    // Test Account: Account #16: 0x2546BcD3c84621e976D8185a91A922aE77ECEc30 (10000 ETH) 
-    // Private Key: 0xea6c44ac03bff858b476bba40716402b03e41b8e97e276d1baec7c37d42484a0
+// Get the corresponding wallet from the environment variable PRIV_KEY to sign transactions. 
+function getWallet() {
 
     const privateKey = process.env.PRIV_KEY;
-
-    // const privateKey = "0xea6c44ac03bff858b476bba40716402b03e41b8e97e276d1baec7c37d42484a0";
+    
+    console.log("Provider", ethers.provider);
     const wallet = new ethers.Wallet(privateKey, ethers.provider);
 
     console.log("Account in use: ", wallet.address);
 
     return wallet;
-}
-
-function getWallet(){
-
 }
 
 // Server listening to PORT 3000
