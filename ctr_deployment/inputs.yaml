@@ -1,3 +1,3 @@
 path: "/Users/ar-alv.pendasrecondo/Desktop/Build_a_Thon/docker-network/ctr_deployment" #Change this line with your path 
-ctr_json_url: "http://0.0.0.0:8080/ipfs/QmP5ffWUvKWUDpoMCSvdw6rwfy3r2CoZAgDJJtiY8h84B4"
+ctr_json_url: "http://0.0.0.0:8090/ipfs/QmP5ffWUvKWUDpoMCSvdw6rwfy3r2CoZAgDJJtiY8h84B4"
 
