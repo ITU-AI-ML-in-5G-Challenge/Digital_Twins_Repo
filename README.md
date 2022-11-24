@@ -1,7 +1,7 @@
 # Docker Network for FGAN Digital Twins
 ## Demo
 
-https://drive.google.com/file/d/1RcLGaupZk4i-S_hT8INUxz5pNFhPREmd/view?usp=sharing
+You can find a video demo of this project [here](https://drive.google.com/file/d/1RcLGaupZk4i-S_hT8INUxz5pNFhPREmd/view?usp=sharing).
 
 ## Pre-requisites
 * Docker Engine and Docker Compose: https://www.docker.com/get-started/
