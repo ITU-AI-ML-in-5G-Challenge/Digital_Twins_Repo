@@ -1,12 +1,25 @@
-# Docker Network for FGAN Digital Twins
+# Team Digital Twins: Decentralized Controller Evolution Architecture Including an Integrated Marketplace
+This repository contains the code, report, slides and demo video of Team Digital Twins' submission to the 2022 AI/ML in 5G Challenge. We present a Proof of Concept (PoC) of the decentralized controller evolution architecture for Autonomous Networks (AN) using a distributed Marketplace.
+
+# Table of Contents
+1. [Introduction](#introduction)
+2. [Demo](#demo)
+3. [Installation and Reproduction](#quick-start)
+4. [Troubleshooting](#troubleshooting)
+
+## Introduction
+
 ## Demo
 
 You can find a video demo of this project [here](https://drive.google.com/file/d/1RcLGaupZk4i-S_hT8INUxz5pNFhPREmd/view?usp=sharing).
 
-## Pre-requisites
+
+## Installation and Reproduction
+
+### Pre-requisites
 * Docker Engine and Docker Compose: https://www.docker.com/get-started/
 
-## Quick-start
+### Quick-start
 
 To start the network run the following command in your terminal from the working directory:
 ```sh
