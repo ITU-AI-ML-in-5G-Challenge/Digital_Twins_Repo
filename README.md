@@ -1,5 +1,5 @@
 # Team Digital Twins: Decentralized Controller Evolution Architecture Including an Integrated Marketplace
-This repository contains the code, report, slides and demo video of Team Digital Twins' submission to the 2022 AI/ML in 5G Challenge. We present a Proof of Concept (PoC) of the decentralized controller evolution architecture for Autonomous Networks (AN) using a distributed Marketplace.
+This repository contains the code, [report](Final_Report_Digital_Twins_Build_a_thon.pdf), [slides](Presentation-Digital-Twins.pptx) and [demo video](#demo) of Team Digital Twins' submission to the 2022 AI/ML in 5G Challenge. We present a Proof of Concept (PoC) of the decentralized controller evolution architecture for Autonomous Networks (AN) using a distributed Marketplace.
 
 # Table of Contents
 1. [Introduction](#introduction)
