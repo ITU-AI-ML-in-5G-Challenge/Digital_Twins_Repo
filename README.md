@@ -8,7 +8,9 @@ This repository contains the code, [report](Final_Report_Digital_Twins_Build_a_t
 4. [Troubleshooting](#troubleshooting)
 
 ## Introduction
-With this project, we aim to solve the problem of ensuring security, traceability and trust in the evolution of controllers in AN. To this end, we have developed a fully decentralized Marketplace that registers, stores and protects evolution artifacts in a way that is fully auditable and . This has been achieved through the use of IPFS and a private Ethereum blockchain. 
+With this project, we aim to solve the problem of ensuring security, traceability and trust in the evolution of controllers in AN. To this end, we have developed a fully decentralized Marketplace that registers, stores and protects evolution artifacts in a way that is fully auditable, and secure. This has been achieved through the use of IPFS and a private Ethereum blockchain. For more details, [click here](Final_Report_Digital_Twins_Build_a_thon.pdf).
+
+![alt text](our_solution.png)
 
 ## Demo
 
