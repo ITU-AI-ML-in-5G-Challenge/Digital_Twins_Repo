@@ -2,10 +2,10 @@
 This repository contains the code, [report](Final_Report_Digital_Twins_Build_a_thon.pdf), [slides](Presentation-Digital-Twins.pptx) and [demo video](#demo) of Team Digital Twins' submission to the 2022 AI/ML in 5G Challenge. We present a Proof of Concept (PoC) of the decentralized controller evolution architecture for Autonomous Networks (AN) using a distributed Marketplace.
 
 # Table of Contents
-1. [Introduction](#introduction)
-2. [Demo](#demo)
-3. [Installation and Reproduction](#quick-start)
-4. [Troubleshooting](#troubleshooting)
+1. [`Introduction`](#introduction)
+2. [`Demo`](#demo)
+3. [`Installation and Reproduction`](#quick-start)
+4. [`Troubleshooting`](#troubleshooting)
 
 ## Introduction
 With this project, we aim to solve the problem of ensuring security, traceability and trust in the evolution of controllers in AN. To this end, we have developed a fully decentralized Marketplace that registers, stores and protects evolution artifacts in a way that is fully auditable, and secure. This has been achieved through the use of IPFS and a private Ethereum blockchain. For more details, [click here](Final_Report_Digital_Twins_Build_a_thon.pdf).
@@ -20,7 +20,7 @@ You can find a video demo of this project [here](https://drive.google.com/file/d
 ## Installation and Reproduction
 
 ### Pre-requisites
-* Docker Engine and Docker Compose: https://www.docker.com/get-started/
+* Docker Engine and Docker Compose: `https://www.docker.com/get-started/`
 
 ### Quick-start
 
