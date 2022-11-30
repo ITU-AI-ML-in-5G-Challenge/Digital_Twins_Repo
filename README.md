@@ -4,7 +4,7 @@ This repository contains the code, [report](Final_Report_Digital_Twins_Build_a_t
 # Table of Contents
 1. [`Introduction`](#introduction)
 2. [`Demo`](#demo)
-3. [`Installation and Reproduction`](#quick-start)
+3. [`Reproduction`](#quick-start)
 4. [`Troubleshooting`](#troubleshooting)
 
 ## Introduction
@@ -17,7 +17,7 @@ With this project, we aim to solve the problem of ensuring security, traceabilit
 You can find a video demo of this project [here](https://drive.google.com/file/d/1RcLGaupZk4i-S_hT8INUxz5pNFhPREmd/view?usp=sharing).
 
 
-## Installation and Reproduction
+## Reproduction
 
 ### Pre-requisites
 * Docker Engine and Docker Compose: `https://www.docker.com/get-started/`
